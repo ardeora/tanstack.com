@@ -24,7 +24,7 @@ export const loader = async (context: LoaderArgs) => {
 
   const filePath = `docs/${docsPath}.md`
 
-  const file = await fetchRepoFile('tanstack/query', v4branch, filePath)
+  const file = await fetchRepoFile('ardeora/query', v4branch, filePath)
 
   if (!file) {
     throw new Response('Not Found', {

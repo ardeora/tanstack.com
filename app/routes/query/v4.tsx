@@ -11,7 +11,7 @@ export const v4branch = 'main'
 
 export const loader = async () => {
   const config = await fetchRepoFile(
-    'tanstack/query',
+    'ardeora/query',
     v4branch,
     `docs/config.json`
   )
