@@ -116,12 +116,13 @@ export function Docs({
           </div>
           <Search {...config.docSearch} />
         </summary>
-        <FrameworkSelect />
+        
         <div
           className="flex flex-col gap-4 p-4 whitespace-nowrap h-[0vh] overflow-y-auto
           border-t border-gray-500 border-opacity-20 bg-gray-100 text-lg
           dark:bg-gray-900"
         >
+          <FrameworkSelect />
           {menuItems}
         </div>
       </details>

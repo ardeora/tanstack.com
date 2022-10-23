@@ -42,7 +42,7 @@ export function FrameworkSelect() {
   }
 
   return (
-    <div className="top-16 w-full px-4">
+    <div className="top-16 w-full lg:px-4">
       <div className="text-[.9em] uppercase font-black">Framework</div>
       <Form >
         <Listbox name='framework' value={selected} onChange={selectFramework}>
