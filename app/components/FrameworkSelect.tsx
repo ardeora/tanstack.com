@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef } from 'react'
+import { Fragment} from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 
 import { HiCheck, HiChevronDown } from 'react-icons/hi'
@@ -7,6 +7,7 @@ import vueLogo from '../images/vue-logo.svg'
 import reactLogo from '../images/react-logo.svg'
 import solidLogo from '../images/solid-logo.svg'
 import svelteLogo from '../images/svelte-logo.svg'
+import angularLogo from '../images/angular-logo.svg'
 import { Form, useMatches } from '@remix-run/react'
 import { useNavigate } from '@remix-run/react'
 
@@ -15,6 +16,7 @@ const frameworks = [
   { label: 'Solid', value: 'solid' },
   { label: 'Vue', value: 'vue' },
   { label: 'Svelte', value: 'svelte' },
+  { label: 'Angular', value: 'angular' },
 ]
 
 const logoMap = {
@@ -22,6 +24,7 @@ const logoMap = {
   solid: solidLogo,
   vue: vueLogo,
   svelte: svelteLogo,
+  angular: angularLogo,
 }
 
 const properCase = (str: string) => str[0].toUpperCase() + str.slice(1)
