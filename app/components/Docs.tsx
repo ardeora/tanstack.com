@@ -24,6 +24,7 @@ export type DocsConfig = {
       to: string;
     }[];
   }[];
+  framework: string;
 };
 
 export function Docs({
@@ -32,12 +33,14 @@ export function Docs({
   textColor,
   logo,
   config,
+  framework
 }: {
   colorFrom: string;
   colorTo: string;
   textColor: string;
   logo: React.ReactNode;
   config: DocsConfig;
+  framework: string;
 }) {
   const matches = useMatches();
   const lastMatch = last(matches);
@@ -73,7 +76,7 @@ export function Docs({
                   <a href={child.to}>{child.label}</a>
                 ) : (
                   <NavLink
-                    to={child.to}
+                    to={'../' + child.to}
                     className={(props) =>
                       props.isActive
                         ? `font-bold text-transparent bg-clip-text bg-gradient-to-r ${colorFrom} ${colorTo}`
@@ -134,7 +137,7 @@ export function Docs({
           apiKey={config.docSearch.apiKey}
         />
       </div>
-      <FrameworkSelect />
+      <FrameworkSelect framework={framework} />
       <div className="flex-1 flex flex-col gap-4 px-4 whitespace-nowrap overflow-y-auto text-base pb-[300px]">
         {menuItems}
       </div>

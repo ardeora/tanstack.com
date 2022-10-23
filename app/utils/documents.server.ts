@@ -38,17 +38,23 @@ export async function fetchRepoFile(
         return file.toString()
       }
 
-      let filePath = `${owner}/${repo}/${ref}/${filepath}`
-      const href = new URL(`/${filePath}`, 'https://raw.githubusercontent.com/')
-        .href
-
-      let response = await fetch(href, {
-        headers: { 'User-Agent': `docs:${owner}/${repo}` },
-      })
-
-      if (!response.ok) return null
-
-      return response.text()
+      while (true) {
+        let filePath = `${owner}/${repo}/${ref}/${filepath}`
+        const href = new URL(`/${filePath}`, 'https://raw.githubusercontent.com/')
+          .href
+        let response = await fetch(href, {
+          headers: { 'User-Agent': `docs:${owner}/${repo}` },
+        })
+        const text = await response.text()
+        if (!response.ok) return Promise.resolve(text)
+        try {
+          const frontmatter = extractFrontMatter(text)
+          if (!frontmatter.data.ref) return Promise.resolve(text)
+          filepath = frontmatter.data.ref
+        } catch (error) {
+          return Promise.resolve(text)
+        }
+      }
     },
   })
 

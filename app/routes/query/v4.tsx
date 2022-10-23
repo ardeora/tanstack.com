@@ -3,11 +3,29 @@ import { Link, Outlet, useLocation, useSearchParams } from '@remix-run/react'
 import { json, LoaderArgs, MetaFunction } from '@remix-run/node'
 import { DefaultErrorBoundary } from '~/components/DefaultErrorBoundary'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
-import { DocsConfig } from '~/components/Docs'
 import { fetchRepoFile } from '~/utils/documents.server'
 import { useMatchesData } from '~/utils/utils'
 
-export const v4branch = 'main'
+export const v4branch = 'docs-restructure'
+
+export type GithubDocsConfig = {
+  docSearch: {
+    appId: string;
+    indexName: string;
+    apiKey: string;
+  };
+  menu: {
+    framework: string | React.ReactNode;
+    menuItems: {
+      label: string | React.ReactNode;
+      children: {
+        label: string;
+        to: string;
+      }[];
+    }[];
+  }[];
+  framework: string;
+};
 
 export const loader = async () => {
   const config = await fetchRepoFile(
@@ -29,7 +47,7 @@ export const ErrorBoundary = DefaultErrorBoundary
 export const CatchBoundary = DefaultCatchBoundary
 
 export const useReactQueryV4Config = () =>
-  useMatchesData('/query/v4') as DocsConfig
+  useMatchesData('/query/v4') as GithubDocsConfig
 
 export default function RouteReactQuery() {
   const [params] = useSearchParams()
